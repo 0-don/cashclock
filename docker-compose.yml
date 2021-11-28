@@ -2,11 +2,9 @@ version: "3.4"
 
 services:
   cashclock:
-    hostname: cashclock
     ports:
-      - 80:420
+      - 420:80
     build:
-      context: ./
       dockerfile: Dockerfile
       target: prod
     restart: always
