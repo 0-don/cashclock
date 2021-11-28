@@ -5,6 +5,7 @@ services:
     ports:
       - 420:80
     build:
+      context: /
       dockerfile: Dockerfile
       target: prod
     restart: always
