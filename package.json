@@ -1,0 +1,53 @@
+{
+  "name": "cashclock",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^6.2.0",
+    "@headlessui/react": "^1.3.0",
+    "@heroicons/react": "^1.0.2",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.1.9",
+    "@types/jest": "^26.0.24",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "immer": "^9.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "react-tiny-popover": "^6.0.5",
+    "typescript": "^4.3.5",
+    "web-vitals": "^2.1.0",
+    "zustand": "^3.5.7"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.4"
+  }
+}
