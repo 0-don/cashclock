@@ -4,7 +4,7 @@ services:
   cashclock:
     hostname: cashclock
     ports:
-      - 420:80
+      - 420:420
     build:
       context: ./
       dockerfile: Dockerfile
