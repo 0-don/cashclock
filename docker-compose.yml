@@ -2,6 +2,7 @@ version: "3.4"
 
 services:
   cashclock:
+    hostname: cashclock
     ports:
       - 420:80
     build:
