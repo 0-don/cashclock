@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+  cashclock:
+    ports:
+      - 420:80
+    build:
+      dockerfile: Dockerfile
+      target: prod
+    restart: always
+    networks:
+      - nginx-network
+
+networks:
+  nginx-network:
+    external:
+      name: nginx-network
