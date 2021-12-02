@@ -4,7 +4,7 @@ services:
   cashclock:
     hostname: cashclock
     ports:
-      - 420:80
+      - 420:420
     build:
       context: ./
       dockerfile: Dockerfile
@@ -12,6 +12,7 @@ services:
     restart: always
     environment:
       - GENERATE_SOURCEMAP=false
+      - NGINX_PORT=420
     networks:
       - nginx-network
 
