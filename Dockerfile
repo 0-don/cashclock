@@ -29,5 +29,7 @@ RUN rm -rf ./*
 
 COPY --from=builder /app/build .
 
+EXPOSE 420
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 #############################################
