@@ -25,12 +25,14 @@ FROM nginx AS prod
 
 WORKDIR /usr/share/nginx/html
 
-RUN rm -rf ./*
+RUN rm -rf ./* && apk add nano
 
 COPY --from=builder /app/build .
-COPY nginx.conf /etc/nginx/
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 420
+
+WORKDIR /etc/nginx
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 #############################################
