@@ -21,7 +21,7 @@ RUN yarn build
 
 # Production image, copy only production files
 # Stage 2
-FROM nginx AS prod
+FROM nginx:alpine AS prod
 
 WORKDIR /usr/share/nginx/html
 
