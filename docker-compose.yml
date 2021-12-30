@@ -14,9 +14,9 @@ services:
       - GENERATE_SOURCEMAP=false
       - NGINX_PORT=420
     networks:
-      - nginx-network
+      - nginx-pm_default
 
 networks:
-  nginx-network:
-    external:
-      name: nginx-network
+  nginx-pm_default:
+    external: false
+    name: nginx-pm_default
