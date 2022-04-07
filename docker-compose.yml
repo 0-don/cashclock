@@ -1,10 +1,10 @@
-version: "3.4"
+version: "3.8"
 
 services:
   cashclock:
     hostname: cashclock
     ports:
-      - 420:420
+      - 80:80
     build:
       context: ./
       dockerfile: Dockerfile
@@ -12,11 +12,15 @@ services:
     restart: always
     environment:
       - GENERATE_SOURCEMAP=false
-      - NGINX_PORT=420
     networks:
-      - nginx-pm_default
+      - proxy
+    labels:
+    - 'traefik.enable=true'
+    - 'traefik.http.routers.librespeed.rule=Host(`cashclock.myngz.com`)'
+    - 'traefik.http.routers.librespeed.entrypoints=websecure'
+    - 'traefik.http.routers.librespeed.tls.certresolver=letsencrypt'
 
 networks:
-  nginx-pm_default:
+  proxy:
     external: false
-    name: nginx-pm_default
+    name: proxy
