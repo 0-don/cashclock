@@ -30,7 +30,7 @@ RUN rm -rf ./* && apk add nano
 COPY --from=builder /app/build .
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 420
+EXPOSE 80
 
 WORKDIR /etc/nginx
 
