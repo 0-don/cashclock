@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   cashclock:
-    hostname: cashclock
+    container_name: cashclock
     ports:
       - 80
     build:
