@@ -14,7 +14,7 @@ services:
       - proxy
     labels:
     - 'traefik.enable=true'
-    - 'traefik.http.routers.cashclock.rule=Host(`cashclock.myngz.com`)'
+    - 'traefik.http.routers.cashclock.rule=Host(`$DOMAIN`)'
     - 'traefik.http.routers.cashclock.entrypoints=websecure'
     - 'traefik.http.routers.cashclock.tls.certresolver=letsencrypt'
 
