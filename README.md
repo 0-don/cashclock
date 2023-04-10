@@ -9,7 +9,7 @@
   <p align="center">
     Fun project. money x time calculator with multiple instances
     <br />
-    <a href="https://cashclock.myngz.com/">View Site</a>
+    <a href="https://cashclock.coding.global/">View Site</a>
     ·
     <a href="https://github.com/Don-Cryptus/cashclock/issues">Report Bug</a>
     ·
