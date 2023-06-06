@@ -15,8 +15,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN ls -a
-RUN yarn install
 RUN yarn build 
 #############################################
 
