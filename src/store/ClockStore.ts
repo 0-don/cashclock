@@ -26,10 +26,11 @@ type ClockStore = {
   changeMoneyHour: (id: string, moneyHour: string) => void;
   stopResetClocks: () => void;
   stopClocks: () => void;
+  getHighestClock: () => Clock;
 };
 
 export const ClockStore = create<ClockStore>()(
-  immer<ClockStore>((set) => ({
+  immer<ClockStore>((set, get) => ({
     clockList: [
       {
         id: randomId(),
@@ -146,5 +147,12 @@ export const ClockStore = create<ClockStore>()(
           return clock;
         });
       }),
+    getHighestClock: () => {
+      const { clockList } = get();
+      const highestClock = clockList.reduce((prev, current) =>
+        prev.timerTime > current.timerTime ? prev : current
+      );
+      return highestClock;
+    },
   }))
 );

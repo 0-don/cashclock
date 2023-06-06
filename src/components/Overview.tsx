@@ -16,10 +16,9 @@ const currencies = [
 
 const Overview: React.FC = () => {
   const interval = useRef<number>(0);
-  const { clockList } = ClockStore();
+  const { clockList, getHighestClock } = ClockStore();
   const {
     timerOn,
-    timerTime,
     currency,
     money,
     updateOverviewClock,
@@ -45,7 +44,7 @@ const Overview: React.FC = () => {
     {
       name: "Time",
       icon: AiOutlineClockCircle,
-      amount: timeString(timerTime),
+      amount: timeString(getHighestClock().timerTime),
       reset: resetOverviewClock,
     },
     {

@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
-import { BsPlusCircle } from "react-icons/bs";
-
+import { AiOutlinePlus } from "react-icons/ai";
 import { ClockStore } from "../store/ClockStore";
 import { OverviewStore } from "../store/OverviewStore";
 import Clock from "./Clock";
@@ -57,7 +56,7 @@ const Cashclocks: React.FC = () => {
                 type="button"
                 className=" rounded-full border border-transparent bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                <BsPlusCircle className="h-5 w-5" />
+                <AiOutlinePlus className="h-5 w-5" />
               </button>
             </div>
           </div>

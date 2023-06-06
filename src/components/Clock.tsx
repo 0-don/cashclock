@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   AiFillPauseCircle,
-  AiFillPlayCircle,
   AiOutlineClockCircle,
-  AiOutlineMinusSquare,
-  AiOutlinePlusCircle,
+  AiOutlineMinus,
+  AiOutlinePlayCircle,
+  AiOutlinePlus,
 } from "react-icons/ai";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
@@ -80,7 +80,7 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
             }}
             className="inline-flex items-center rounded-full border border-transparent bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
-            <AiFillPlayCircle className="h-5 w-5" aria-hidden="true" />
+            <AiOutlinePlayCircle className="h-5 w-5" aria-hidden="true" />
           </button>
         )}
         {clock.timerOn && (
@@ -123,7 +123,7 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
                     }}
                     className="rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <AiOutlinePlusCircle
+                    <AiOutlinePlus
                       className="h-5 w-5 text-white"
                       aria-hidden="true"
                     />
@@ -160,7 +160,7 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
                     onClick={() => updateClockTime(clock.id, -3600000)}
                     className="rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <AiOutlineMinusSquare
+                    <AiOutlineMinus
                       className="h-5 w-5 text-white"
                       aria-hidden="true"
                     />
@@ -232,7 +232,7 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
           }}
           className="inline-flex items-center rounded-full border border-transparent bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          <AiOutlineMinusSquare className="h-5 w-5" aria-hidden="true" />
+          <AiOutlineMinus className="h-5 w-5" aria-hidden="true" />
         </button>
       </td>
     </tr>
