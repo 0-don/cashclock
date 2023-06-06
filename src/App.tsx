@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Cashclocks from "./components/Cashclocks";
 import Stats from "./components/Overview";
-import { OverviewStore } from "./store/OverviewStore";
+import { OverviewStore } from "./store/xOverviewStore";
 
 const App: React.FC = () => {
   const { resetStop } = OverviewStore();
