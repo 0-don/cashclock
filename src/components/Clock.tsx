@@ -11,7 +11,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { SlRefresh } from "react-icons/sl";
 import { ArrowContainer, Popover } from "react-tiny-popover";
 import { Clock, ClockStore } from "../store/ClockStore";
-import { OverviewStore } from "../store/OverviewStore";
+import { OverviewStore } from "../store/PverviewStore";
 import { timeString } from "../utils";
 
 interface StopwatchProps {

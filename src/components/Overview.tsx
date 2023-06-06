@@ -3,7 +3,7 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsCashCoin } from "react-icons/bs";
 import { FaBalanceScale } from "react-icons/fa";
 import { ClockStore } from "../store/ClockStore";
-import { OverviewStore } from "../store/OverviewStore";
+import { OverviewStore } from "../store/PverviewStore";
 import { timeString } from "../utils";
 
 const currencies = [
