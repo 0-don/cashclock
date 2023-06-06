@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { moneyTime, randomId } from "../utils";
-import { OverviewStore } from "./xOverviewStore";
+import { OverviewStore } from "./OverviewStore";
 
 export type Clock = {
   id: string;

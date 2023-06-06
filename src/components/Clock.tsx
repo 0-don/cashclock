@@ -10,8 +10,8 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { SlRefresh } from "react-icons/sl";
 import { ArrowContainer, Popover } from "react-tiny-popover";
-import { Clock, ClockStore } from "../store/xClockStore";
-import { OverviewStore } from "../store/xOverviewStore";
+import { Clock, ClockStore } from "../store/ClockStore";
+import { OverviewStore } from "../store/OverviewStore";
 import { timeString } from "../utils";
 
 interface StopwatchProps {

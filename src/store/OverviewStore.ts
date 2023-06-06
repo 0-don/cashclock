@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { ClockStore } from "./xClockStore";
+import { ClockStore } from "./ClockStore";
 
 type MoneyList = {
   id: string;
