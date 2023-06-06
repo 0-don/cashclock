@@ -1,6 +1,6 @@
 # Install dependencies only when needed
 # Stage 0
-FROM node:16-alpine AS deps
+FROM node:18-alpine AS deps
 WORKDIR /app
 
 COPY package.json ./
@@ -10,7 +10,7 @@ RUN yarn install --frozen-lockfile
 
 # Rebuild the source code only when needed
 # Stage 1
-FROM node:16-alpine AS builder
+FROM node:18-alpine AS builder
 WORKDIR /app
 
 COPY . .
@@ -27,7 +27,7 @@ WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./* && apk add nano
 
-COPY --from=builder /app/build .
+COPY --from=builder /app/dist .
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

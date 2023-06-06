@@ -1,7 +1,7 @@
-import create from 'zustand';
-import { randomId, immer, moneyTime } from '../utils';
-import { persist } from 'zustand/middleware';
-import useOverviewStore from './overviewStore';
+import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
+import { moneyTime, randomId } from "../utils";
+import { OverviewStore } from "./OverviewStore";
 
 export type Clock = {
   id: string;
@@ -28,136 +28,123 @@ type ClockStore = {
   stopClocks: () => void;
 };
 
-const useClockStore = create<ClockStore>(
-  persist(
-    immer(
-      (set): ClockStore => ({
-        clockList: [
-          {
-            id: randomId(),
-            name: '',
-            timerOn: false,
-            timerStart: 0,
-            timerTime: 0,
-            money: 0,
-            moneyHour: '180',
-          },
-        ],
-        startClock: (id) =>
-          set((state) => {
-            const { clockList } = state;
-            const i = clockList.findIndex((clock) => clock.id === id);
-            clockList[i].timerOn = true;
-            clockList[i].timerStart = Date.now() - clockList[i].timerTime;
-          }),
-        stopClock: (id) =>
-          set((state) => {
-            const { clockList } = state;
-            const i = clockList.findIndex((clock) => clock.id === id);
-            clockList[i].timerOn = false;
-          }),
-        deleteClock: (id) =>
-          set((state) => {
-            const i = state.clockList.findIndex((clock) => clock.id === id);
-            state.clockList.splice(i, 1);
-          }),
-        createClock: () =>
-          set((state) => {
-            state.clockList.push({
-              id: randomId(),
-              name: '',
-              timerOn: false,
-              timerStart: 0,
-              timerTime: 0,
-              money: 0,
-              moneyHour: '180',
-            });
-          }),
-        updateClock: (id) =>
-          set((state) => {
-            const { clockList } = state;
-            const i = clockList.findIndex((clock) => clock.id === id);
-            const money = moneyTime(
-              clockList[i].timerTime,
-              clockList[i].moneyHour
-            );
+export const ClockStore = create<ClockStore>()(
+  immer<ClockStore>((set) => ({
+    clockList: [
+      {
+        id: randomId(),
+        name: "",
+        timerOn: false,
+        timerStart: 0,
+        timerTime: 0,
+        money: 0,
+        moneyHour: "180",
+      },
+    ],
+    startClock: (id) =>
+      set((state) => {
+        const { clockList } = state;
+        const i = clockList.findIndex((clock) => clock.id === id);
+        clockList[i].timerOn = true;
+        clockList[i].timerStart = Date.now() - clockList[i].timerTime;
+      }),
+    stopClock: (id) =>
+      set((state) => {
+        const { clockList } = state;
+        const i = clockList.findIndex((clock) => clock.id === id);
+        clockList[i].timerOn = false;
+      }),
+    deleteClock: (id) =>
+      set((state) => {
+        const i = state.clockList.findIndex((clock) => clock.id === id);
+        state.clockList.splice(i, 1);
+      }),
+    createClock: () =>
+      set((state) => {
+        state.clockList.push({
+          id: randomId(),
+          name: "",
+          timerOn: false,
+          timerStart: 0,
+          timerTime: 0,
+          money: 0,
+          moneyHour: "180",
+        });
+      }),
+    updateClock: (id) =>
+      set((state) => {
+        const { clockList } = state;
+        const i = clockList.findIndex((clock) => clock.id === id);
+        const money = moneyTime(clockList[i].timerTime, clockList[i].moneyHour);
 
-            clockList[i].money = money;
-            clockList[i].timerTime = Date.now() - clockList[i].timerStart;
+        clockList[i].money = money;
+        clockList[i].timerTime = Date.now() - clockList[i].timerStart;
 
-            useOverviewStore.getState().updateMoneyList(clockList[i].id, money);
-          }),
-        updateClockTime: (id, time) => {
-          const clock = useClockStore
-            .getState()
-            .clockList.find((clock) => clock.id === id);
-          const clockTimerOn = clock?.timerOn ? true : false;
+        OverviewStore.getState().updateMoneyList(clockList[i].id, money);
+      }),
+    updateClockTime: (id, time) => {
+      const clock = ClockStore.getState().clockList.find(
+        (clock) => clock.id === id
+      );
+      const clockTimerOn = clock?.timerOn ? true : false;
 
-          useClockStore.getState().stopClock(id);
-          useOverviewStore.getState().stopOverviewClock();
-          
-          set((state) => {
-            const { clockList } = state;
-            const i = clockList.findIndex((clock) => clock.id === id);
+      ClockStore.getState().stopClock(id);
+      OverviewStore.getState().stopOverviewClock();
 
-            if (clockList[i].timerTime + time >= 0) {
-              clockList[i].timerTime += time;
-            } else {
-              clockList[i].timerTime = 0;
-            }
+      set((state) => {
+        const { clockList } = state;
+        const i = clockList.findIndex((clock) => clock.id === id);
 
-            clockList[i].money = moneyTime(
-              clockList[i].timerTime,
-              clockList[i].moneyHour
-            );
-            useOverviewStore.getState().updateMoneyList(id, clockList[i].money);
-          });
-          if (clockTimerOn) {
-            useClockStore.getState().startClock(id);
-            useOverviewStore.getState().startOverviewClock();
-          }
-        },
-        resetClock: (id) =>
-          set((state) => {
-            const { clockList } = state;
-            const i = clockList.findIndex((clock) => clock.id === id);
-            clockList[i].money = 0;
-            clockList[i].timerTime = 0;
-            useOverviewStore.getState().updateMoneyList(id, clockList[i].money);
-          }),
-        changeName: (id, name) =>
-          set((state) => {
-            const i = state.clockList.findIndex((clock) => clock.id === id);
-            state.clockList[i].name = name;
-          }),
-        changeMoneyHour: (id, moneyHour) =>
-          set((state) => {
-            const i = state.clockList.findIndex((clock) => clock.id === id);
-            state.clockList[i].moneyHour = moneyHour;
-          }),
-        stopResetClocks: () =>
-          set((state) => {
-            state.clockList.map((clock) => {
-              clock.timerOn = false;
-              clock.money = 0;
-              clock.timerTime = 0;
-              return clock;
-            });
-          }),
-        stopClocks: () =>
-          set((state) => {
-            state.clockList.map((clock) => {
-              clock.timerOn = false;
-              return clock;
-            });
-          }),
-      })
-    ),
-    {
-      name: 'Clock-Store',
-      getStorage: () => localStorage,
-    }
-  )
+        if (clockList[i].timerTime + time >= 0) {
+          clockList[i].timerTime += time;
+        } else {
+          clockList[i].timerTime = 0;
+        }
+
+        clockList[i].money = moneyTime(
+          clockList[i].timerTime,
+          clockList[i].moneyHour
+        );
+        OverviewStore.getState().updateMoneyList(id, clockList[i].money);
+      });
+      if (clockTimerOn) {
+        ClockStore.getState().startClock(id);
+        OverviewStore.getState().startOverviewClock();
+      }
+    },
+    resetClock: (id) =>
+      set((state) => {
+        const { clockList } = state;
+        const i = clockList.findIndex((clock) => clock.id === id);
+        clockList[i].money = 0;
+        clockList[i].timerTime = 0;
+        OverviewStore.getState().updateMoneyList(id, clockList[i].money);
+      }),
+    changeName: (id, name) =>
+      set((state) => {
+        const i = state.clockList.findIndex((clock) => clock.id === id);
+        state.clockList[i].name = name;
+      }),
+    changeMoneyHour: (id, moneyHour) =>
+      set((state) => {
+        const i = state.clockList.findIndex((clock) => clock.id === id);
+        state.clockList[i].moneyHour = moneyHour;
+      }),
+    stopResetClocks: () =>
+      set((state) => {
+        state.clockList.map((clock) => {
+          clock.timerOn = false;
+          clock.money = 0;
+          clock.timerTime = 0;
+          return clock;
+        });
+      }),
+    stopClocks: () =>
+      set((state) => {
+        state.clockList.map((clock) => {
+          clock.timerOn = false;
+          return clock;
+        });
+      }),
+  }))
 );
-
-export default useClockStore;

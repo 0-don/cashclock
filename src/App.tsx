@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import Cashclocks from './components/Cashclocks';
-import Stats from './components/Overview';
-import useOverviewStore from './store/overviewStore';
+import React, { useEffect } from "react";
+import Cashclocks from "./components/Cashclocks";
+import Stats from "./components/Overview";
+import { OverviewStore } from "./store/OverviewStore";
 
 const App: React.FC = () => {
-  const { resetStop } = useOverviewStore();
-  
+  const { resetStop } = OverviewStore();
+
   useEffect(() => {
     resetStop();
     // eslint-disable-next-line
   }, []);
 
   return (
-    <div className='background m-0 w-full h-full'>
-      <div className='mt-5'>
+    <div className="background m-0 h-full w-full">
+      <div className="mt-5">
         <Stats />
         <Cashclocks />
       </div>

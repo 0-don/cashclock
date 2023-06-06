@@ -1,27 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import {
-  MinusIcon,
-  PauseIcon,
-  PlayIcon,
-  ClockIcon,
-  RefreshIcon,
-  PlusIcon,
-  ArrowDownIcon,
-  ArrowUpIcon,
-  ChevronUpIcon,
-  ChevronDownIcon,
-} from '@heroicons/react/outline';
-import useClockStore, { Clock } from '../store/clockStore';
-import useStatsStore from '../store/overviewStore';
-import { timeString } from '../utils';
-import { ArrowContainer, Popover } from 'react-tiny-popover';
+  AiFillPauseCircle,
+  AiFillPlayCircle,
+  AiOutlineClockCircle,
+  AiOutlineMinusSquare,
+  AiOutlinePlusCircle,
+} from "react-icons/ai";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { SlRefresh } from "react-icons/sl";
+import { ArrowContainer, Popover } from "react-tiny-popover";
+import { Clock, ClockStore } from "../store/ClockStore";
+import { OverviewStore } from "../store/OverviewStore";
+import { timeString } from "../utils";
 
 interface StopwatchProps {
   clock: Clock;
 }
 
 const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
-  let interval = useRef<number>(0);
+  const interval = useRef<number>(0);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const {
@@ -33,8 +31,8 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
     updateClockTime,
     changeName,
     changeMoneyHour,
-  } = useClockStore();
-  const { currency, startOverviewClock, stopOverviewClock } = useStatsStore();
+  } = ClockStore();
+  const { currency, startOverviewClock, stopOverviewClock } = OverviewStore();
 
   useEffect(() => {
     if (clock.timerOn && !interval.current) {
@@ -49,23 +47,23 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
   }, [clock, updateClock]);
 
   return (
-    <tr className='bg-white'>
-      <td className='px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500'>
+    <tr className="bg-white">
+      <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
         <input
-          type='text'
-          className='text-center shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          type="text"
+          className="focus:shadow-outline w-full appearance-none rounded border px-1 py-1 text-center leading-tight text-gray-700 shadow focus:outline-none"
           value={clock.name}
-          placeholder='Label'
+          placeholder="Label"
           onChange={(e) => changeName(clock.id, e.target.value)}
         />
       </td>
 
-      <td className='px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500'>
-        <div className='mt-1 relative rounded-md shadow-sm'>
+      <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
+        <div className="relative mt-1 rounded-md shadow-sm">
           <div>
             <input
-              type='text'
-              className='text-center shadow appearance-none border rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              type="text"
+              className="focus:shadow-outline w-full appearance-none rounded border px-1 py-1 text-center leading-tight text-gray-700 shadow focus:outline-none"
               value={clock.moneyHour}
               onChange={(e) => changeMoneyHour(clock.id, e.target.value)}
             />
@@ -73,16 +71,16 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
         </div>
       </td>
 
-      <td className='px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500'>
+      <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
         {!clock.timerOn && (
           <button
             onClick={() => {
               startClock(clock.id);
               startOverviewClock();
             }}
-            className='inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+            className="inline-flex items-center rounded-full border border-transparent bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
-            <PlayIcon className='h-5 w-5' aria-hidden='true' />
+            <AiFillPlayCircle className="h-5 w-5" aria-hidden="true" />
           </button>
         )}
         {clock.timerOn && (
@@ -91,18 +89,18 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
               stopClock(clock.id);
               stopOverviewClock();
             }}
-            className='inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+            className="inline-flex items-center rounded-full border border-transparent bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
-            <PauseIcon className='h-5 w-5' aria-hidden='true' />
+            <AiFillPauseCircle className="h-5 w-5" aria-hidden="true" />
           </button>
         )}
       </td>
 
-      <td className='px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500'>
-        <div className='group inline-flex space-x-2 truncate text-sm'>
+      <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
+        <div className="group inline-flex space-x-2 truncate text-sm">
           <Popover
             isOpen={isPopoverOpen}
-            positions={['top', 'left']}
+            positions={["top", "left"]}
             padding={5}
             reposition={false}
             onClickOutside={() => setIsPopoverOpen(false)}
@@ -111,82 +109,82 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
                 position={position}
                 childRect={childRect}
                 popoverRect={popoverRect}
-                arrowColor={'gray'}
+                arrowColor={"gray"}
                 arrowSize={10}
                 arrowStyle={{ opacity: 0.7 }}
-                className='popover-arrow-container'
-                arrowClassName='popover-arrow'
+                className="popover-arrow-container"
+                arrowClassName="popover-arrow"
               >
-                <div className='bg-white shadow align-middle p-2 grid grid-cols-3 gap-1 justify-items-center items-center'>
+                <div className="grid grid-cols-3 items-center justify-items-center gap-1 bg-white p-2 align-middle shadow">
                   <button
                     // Hour+
                     onClick={() => {
                       updateClockTime(clock.id, 3600000);
                     }}
-                    className='rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    className="rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <PlusIcon
-                      className='h-5 w-5 text-white'
-                      aria-hidden='true'
+                    <AiOutlinePlusCircle
+                      className="h-5 w-5 text-white"
+                      aria-hidden="true"
                     />
                   </button>
 
                   <button
                     // Minute+
                     onClick={() => updateClockTime(clock.id, 60000)}
-                    className='rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    className="rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <ChevronUpIcon
-                      className='h-5 w-5 text-white'
-                      aria-hidden='true'
+                    <BsChevronUp
+                      className="h-5 w-5 text-white"
+                      aria-hidden="true"
                     />
                   </button>
 
                   <button
                     // Second+
                     onClick={() => updateClockTime(clock.id, 1000)}
-                    className='rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    className="rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <ArrowUpIcon
-                      className='h-5 w-5 text-white'
-                      aria-hidden='true'
+                    <FaChevronUp
+                      className="h-5 w-5 text-white"
+                      aria-hidden="true"
                     />
                   </button>
 
-                  <div className='text-center'>h</div>
-                  <div className='text-center'>m</div>
-                  <div className='text-center'>s</div>
+                  <div className="text-center">h</div>
+                  <div className="text-center">m</div>
+                  <div className="text-center">s</div>
 
                   <button
                     // Hour-
                     onClick={() => updateClockTime(clock.id, -3600000)}
-                    className='rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    className="rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <MinusIcon
-                      className='h-5 w-5 text-white'
-                      aria-hidden='true'
+                    <AiOutlineMinusSquare
+                      className="h-5 w-5 text-white"
+                      aria-hidden="true"
                     />
                   </button>
 
                   <button
                     // Minute-
                     onClick={() => updateClockTime(clock.id, -60000)}
-                    className='rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    className="rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <ChevronDownIcon
-                      className='h-5 w-5 text-white'
-                      aria-hidden='true'
+                    <BsChevronDown
+                      className="h-5 w-5 text-white"
+                      aria-hidden="true"
                     />
                   </button>
 
                   <button
                     // Second-
                     onClick={() => updateClockTime(clock.id, -1000)}
-                    className='rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    className="rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
-                    <ArrowDownIcon
-                      className='h-5 w-5 text-white'
-                      aria-hidden='true'
+                    <FaChevronDown
+                      className="h-5 w-5 text-white"
+                      aria-hidden="true"
                     />
                   </button>
                 </div>
@@ -194,14 +192,14 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
             )}
           >
             <div
-              className='flex'
+              className="flex"
               onClick={() => setIsPopoverOpen(!isPopoverOpen)}
             >
-              <ClockIcon
-                className='flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500'
-                aria-hidden='true'
+              <AiOutlineClockCircle
+                className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                aria-hidden="true"
               />
-              <span className='text-gray-500 pl-1 truncate group-hover:text-gray-900'>
+              <span className="truncate pl-1 text-gray-500 group-hover:text-gray-900">
                 {timeString(clock.timerTime)}
               </span>
             </div>
@@ -209,22 +207,22 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
         </div>
       </td>
 
-      <td className='px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500'>
-        <span className='text-gray-900 font-medium'>
+      <td className="whitespace-nowrap px-6 py-4 text-center text-sm text-gray-500">
+        <span className="font-medium text-gray-900">
           {`${clock.money.toFixed(2)} ${currency}`}
         </span>
       </td>
 
-      <td className='px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500'>
+      <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
         <button
           onClick={() => {
             stopClock(clock.id);
             resetClock(clock.id);
             stopOverviewClock();
           }}
-          className='inline-flex mr-1 items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+          className="mr-1 inline-flex items-center rounded-full border border-transparent bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          <RefreshIcon className='h-5 w-5' aria-hidden='true' />
+          <SlRefresh className="h-5 w-5" aria-hidden="true" />
         </button>
         <button
           onClick={() => {
@@ -232,9 +230,9 @@ const Stopwatch: React.FC<StopwatchProps> = ({ clock }) => {
             deleteClock(clock.id);
             stopOverviewClock();
           }}
-          className='inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+          className="inline-flex items-center rounded-full border border-transparent bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          <MinusIcon className='h-5 w-5' aria-hidden='true' />
+          <AiOutlineMinusSquare className="h-5 w-5" aria-hidden="true" />
         </button>
       </td>
     </tr>
