@@ -65,8 +65,7 @@ const Overview: React.FC = () => {
             <span className="flex-1 pr-1 font-semibold">{currency}</span>
             <span>
               <svg
-                className="h-4 w-4 transform fill-current transition
-    duration-150 ease-in-out group-hover:-rotate-180"
+                className="h-4 w-4 transform fill-current transition duration-150 ease-in-out group-hover:-rotate-180"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
@@ -74,10 +73,7 @@ const Overview: React.FC = () => {
               </svg>
             </span>
           </button>
-          <ul
-            className="absolute origin-top scale-0 transform rounded-sm border bg-white 
-transition duration-150 ease-in-out group-hover:scale-100"
-          >
+          <ul className="absolute origin-top scale-0 transform rounded-sm border bg-white transition duration-150 ease-in-out group-hover:scale-100">
             {currencies.map((currency) => (
               <li
                 key={currency.id}
