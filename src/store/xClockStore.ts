@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { moneyTime, randomId } from "../utils";
-import { OverviewStore } from "./OverviewStore";
+import { OverviewStore } from "./xOverviewStore";
 
 export type Clock = {
   id: string;
@@ -29,19 +29,19 @@ type ClockStore = {
   getHighestClock: () => Clock;
 };
 
+const initialState = () => ({
+  id: randomId(),
+  name: "",
+  timerOn: false,
+  timerStart: 0,
+  timerTime: 0,
+  money: 0,
+  moneyHour: "180",
+});
+
 export const ClockStore = create<ClockStore>()(
   immer<ClockStore>((set, get) => ({
-    clockList: [
-      {
-        id: randomId(),
-        name: "",
-        timerOn: false,
-        timerStart: 0,
-        timerTime: 0,
-        money: 0,
-        moneyHour: "180",
-      },
-    ],
+    clockList: [initialState()],
     startClock: (id) =>
       set((state) => {
         const { clockList } = state;
@@ -149,10 +149,11 @@ export const ClockStore = create<ClockStore>()(
       }),
     getHighestClock: () => {
       const { clockList } = get();
-      const highestClock = clockList.reduce((prev, current) =>
-        prev.timerTime > current.timerTime ? prev : current
-      );
-      return highestClock;
+      return clockList.length === 0
+        ? initialState()
+        : clockList.reduce((prev, current) =>
+            prev.timerTime > current.timerTime ? prev : current
+          );
     },
   }))
 );

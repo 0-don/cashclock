@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsCashCoin } from "react-icons/bs";
 import { FaBalanceScale } from "react-icons/fa";
-import { ClockStore } from "../store/ClockStore";
-import { OverviewStore } from "../store/OverviewStore";
+import { ClockStore } from "../store/xClockStore";
+import { OverviewStore } from "../store/xOverviewStore";
 import { timeString } from "../utils";
 
 const currencies = [
@@ -44,7 +44,7 @@ const Overview: React.FC = () => {
     {
       name: "Time",
       icon: AiOutlineClockCircle,
-      amount: timeString(getHighestClock().timerTime),
+      amount: timeString(getHighestClock().timerTime || 0),
       reset: resetOverviewClock,
     },
     {

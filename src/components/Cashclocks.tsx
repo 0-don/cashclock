@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { ClockStore } from "../store/ClockStore";
-import { OverviewStore } from "../store/OverviewStore";
+import { ClockStore } from "../store/xClockStore";
+import { OverviewStore } from "../store/xOverviewStore";
 import Clock from "./Clock";
 
 const Cashclocks: React.FC = () => {
