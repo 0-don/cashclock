@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { BsPlusCircle } from "react-icons/bs";
 
-import { ClockStore } from "../store/xClockStore";
-import { OverviewStore } from "../store/xOverviewStore";
+import { ClockStore } from "../store/ClockStore";
+import { OverviewStore } from "../store/OverviewStore";
 import Clock from "./Clock";
 
 const Cashclocks: React.FC = () => {
