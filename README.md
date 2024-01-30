@@ -1,6 +1,6 @@
 
 <p align="center">
-  <a href="https://github.com/Don-Cryptus/echat">
+  <a href="https://github.com/0-don/echat">
     <img src="src/images/cashclock.jpg" alt="Logo" width="200">
   </a>
 
@@ -11,8 +11,8 @@
     <br />
     <a href="https://cashclock.coding.global/">View Site</a>
     ·
-    <a href="https://github.com/Don-Cryptus/cashclock/issues">Report Bug</a>
+    <a href="https://github.com/0-don/cashclock/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Don-Cryptus/cashclock/issues">Request Feature</a>
+    <a href="https://github.com/0-don/cashclock/issues">Request Feature</a>
   </p>
 </p>
