@@ -8,11 +8,18 @@ services:
       dockerfile: Dockerfile
       target: prod
     restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     environment:
       - GENERATE_SOURCEMAP=false
     networks:
       - proxy
     labels:
+    - 'autoheal=true'
     - 'traefik.enable=true'
     - 'traefik.http.routers.cashclock.rule=Host(`$DOMAIN`)'
     - 'traefik.http.routers.cashclock.entrypoints=websecure'
